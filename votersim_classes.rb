@@ -5,11 +5,11 @@ module VoterSimClasses
 
 
 	class Voter
-		attr_accessor :name
+		attr_accessor :name, :id, :type
 
 		def initialize
-			puts "Name?"
-			@name = gets
+			# puts "Name (from Voter Class)?"
+			# @name = gets.chomp
 		end
 	end
 
@@ -18,13 +18,24 @@ module VoterSimClasses
 	class Politician < Voter
 		attr_accessor :party
 
-		def initialize
-			puts "Name?"
-			@name = gets
-			puts "Party? (Democrat or Republican)"
+		def initialize(voter_id)
+			@id = voter_id
+			@type = "Politician"
+			puts "What is your Name?"
+			@name = gets.chomp.downcase.capitalize 
+			system "clear"
+			puts "Hello #{@name}, what is your Party? (Democrat or Republican)"
 			@party=gets.chomp.downcase.capitalize
-			puts "Party = #{@party}"
+			system "clear"
+			puts "Succesful entry.  Politician #{@name}, Party #{@party}"
+			# puts "You entered your Party as  = #{@party}"
+			
 		end
+		
+		def inspect
+			"Politician\'s Name: #{@name},  Politician\'s' Party: #{@party}"
+		end
+
 
 	end
 
@@ -32,12 +43,23 @@ module VoterSimClasses
 	class Person < Voter
 		attr_accessor :politics
 
-		def initialize
-			puts "Name?"
-			@name = gets
-			puts "Politics? (Liberal, Conservative, Tea Party, Socialist, or Neutral)"
+		def initialize(voter_id)
+			@id = voter_id
+			@type = "Person"
+			puts "What is your Name?"
+			@name = gets.chomp.downcase.capitalize 
+			system "clear"
+			puts "Hello #{@name}, what is your Politics?"
+			puts "(Liberal, Conservative, Tea Party, Socialist, or Neutral)"
 			@politics=gets.chomp.downcase.capitalize
-			puts "Politics = #{@politics}"
+			system "clear"
+			puts "Succesful entry.  Politician #{@name}, Politcs #{@politics}"
+			
 		end
+
+		def inspect
+			"Person\'s Name: #{@name},  Person\'s Politics: #{@politics}"
+		end
+
 	end
 end
