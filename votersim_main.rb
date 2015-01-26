@@ -28,9 +28,9 @@ def list_of_voters(voters)
 			puts "** VOTER_ID *** TYPE  *****   NAME ****** PREFERENCE ****\n\n"
 			voters.each {|i| 
 			if i.type == "Person" # if i,class == Politician
-				puts "**   #{i.id}     |    Person  |     #{i.name} |     #{i.politics}     ***\n\n"
+				puts "**   #{i.id}     |    Person  |     #{i.name} |     #{i.politics}  \n\n"
 			else
-				puts "**   #{i.id}     | Politician |     #{i.name} |     #{i.party}    ***\n\n"
+				puts "**   #{i.id}     | Politician |     #{i.name} |     #{i.party}    \n\n"
 			end
 
 			}
@@ -150,8 +150,33 @@ while selection != "exit" do
 
 	when "vote"
 
-		politicians = voters.select{ |x| x.politics.nil? }
-		p politicians
+		election = Vote.new
+		go_ahead_and_vote = election.politicians_speak(voters)
+
+		if go_ahead_and_vote == true
+			puts "We have the go ahead to vote!\n\n\n\n"
+			election.people_vote(voters)
+		else
+			puts "We can't vote yet!"
+			puts "No politicians have spoken!!\n\n\n"
+
+		end
+
+		
+		puts "Republican Votes = #{election.rep_votes}"
+		puts "Democrat Votes = #{election.dem_votes}\n\n\n\n"
+
+		if election.rep_votes > election.dem_votes
+			puts "Winners:  the R E P U B L I C A N S !!!!!"
+		elsif election.rep_votes < election.dem_votes
+			puts "Winners:  the D E M O C R A T S !!!"
+		else 
+			puts "It's a draw!!  Re-vote..."
+		end
+
+			
+
+
 
 	end
 
